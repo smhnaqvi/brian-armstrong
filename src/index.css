@@ -29,3 +29,30 @@ li.nav-item > .nav-link:hover {
 .price-item-box {
     background: linear-gradient(41deg, rgba(42, 42, 60, 0.4) 1.67%, #2F2F41 98.12%);
 }
+
+.right-sidebar{
+    border-radius: 15px 0 0 15px;
+    padding: 28px 32px;
+    background: rgba(43, 43, 61, 1);
+    border: 0.89px solid var(--Border-Inactive, rgba(72, 72, 101, 1));
+    box-shadow: 0px 1.78px 3.56px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0.89px 0.89px 0px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.right-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.right-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.right-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.right-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
