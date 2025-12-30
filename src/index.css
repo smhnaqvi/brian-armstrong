@@ -1,4 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+@theme {
+  --color-primary: #9F7DEF;
+  --color-dashboard-bg: #13131B;
+}
+
+* {
+    /* padding:0; */
+    /* margin:0; */
+}
+
+body {
+    background-color: var(--color-dashboard-bg);
+}
+
+li.nav-item {
+    list-style: none;
+}
+
+li.nav-item > .nav-link {
+    color: #9494B3;
+}
+
+li.nav-item > .nav-link:hover {
+    color: theme('colors.primary');
+}
+
+.price-item-box {
+    background: linear-gradient(41deg, rgba(42, 42, 60, 0.4) 1.67%, #2F2F41 98.12%);
+}

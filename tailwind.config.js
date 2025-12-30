@@ -6,11 +6,7 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        dashboard: {
-          bg: '#13131B',
-        },
-      },
+      colors: {},
     },
   },
   plugins: [],
