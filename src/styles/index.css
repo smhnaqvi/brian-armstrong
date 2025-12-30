@@ -1,13 +1,14 @@
+@import "./font.css";
 @import "tailwindcss";
 
 @theme {
   --color-primary: #9F7DEF;
   --color-dashboard-bg: #13131B;
+  --font-manrope: 'Manrope', sans-serif;
 }
 
 * {
-    /* padding:0; */
-    /* margin:0; */
+    font-family: var(--font-manrope);
 }
 
 body {
