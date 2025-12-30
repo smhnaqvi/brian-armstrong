@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dayjs": "^1.11.19",
+    "interactjs": "^1.10.27",
     "react": "^18.3.1",
+    "react-calendar-timeline": "^0.30.0-beta.4",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.69.0",
     "react-router-dom": "^7.11.0"
   },
   "devDependencies": {

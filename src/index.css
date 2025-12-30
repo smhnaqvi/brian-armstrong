@@ -56,3 +56,126 @@ li.nav-item > .nav-link:hover {
 .right-sidebar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+/* Calendar Timeline Custom Styles */
+.calendar-timeline-container {
+    background: rgba(43, 43, 61, 1);
+    border-radius: 15px;
+    padding: 20px;
+    border: 0.89px solid rgba(72, 72, 101, 1);
+    box-shadow: 0px 1.78px 3.56px 0px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Timeline wrapper */
+.calendar-timeline-container .rct-outer {
+    background: rgba(43, 43, 61, 1);
+    color: #9494B3;
+}
+
+/* Sidebar (groups) styling */
+.calendar-timeline-container .rct-sidebar {
+    background: rgba(31, 31, 43, 1);
+    border-right: 1px solid rgba(72, 72, 101, 1);
+}
+
+.calendar-timeline-container .rct-sidebar-row {
+    border-bottom: 1px solid rgba(72, 72, 101, 0.5);
+    color: #9494B3;
+    padding: 12px 16px;
+}
+
+.calendar-timeline-container .rct-sidebar-row:hover {
+    background: rgba(72, 72, 101, 0.3);
+}
+
+.calendar-timeline-container .rct-sidebar-row.rct-sidebar-row-even {
+    background: rgba(43, 43, 61, 0.5);
+}
+
+/* Timeline header (date labels) */
+.calendar-timeline-container .rct-header-root {
+    background: rgba(31, 31, 43, 1);
+    border-bottom: 1px solid rgba(72, 72, 101, 1);
+}
+
+.calendar-timeline-container .rct-dateHeader {
+    background: rgba(31, 31, 43, 1);
+    border-right: 1px solid rgba(72, 72, 101, 0.5);
+    color: #9494B3;
+    font-weight: 500;
+}
+
+.calendar-timeline-container .rct-dateHeader-primary {
+    background: rgba(31, 31, 43, 1);
+    color: #9494B3;
+    border-bottom: 1px solid rgba(72, 72, 101, 1);
+}
+
+/* Timeline items */
+.calendar-timeline-container .rct-item {
+    background: linear-gradient(41deg, rgba(159, 125, 239, 0.8) 1.67%, rgba(159, 125, 239, 0.6) 98.12%);
+    border: 1px solid rgba(159, 125, 239, 0.9);
+    border-radius: 6px;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 4px 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-timeline-container .rct-item:hover {
+    background: linear-gradient(41deg, rgba(159, 125, 239, 0.9) 1.67%, rgba(159, 125, 239, 0.7) 98.12%);
+    box-shadow: 0px 4px 8px rgba(159, 125, 239, 0.3);
+}
+
+.calendar-timeline-container .rct-item.selected {
+    background: linear-gradient(41deg, rgba(159, 125, 239, 1) 1.67%, rgba(159, 125, 239, 0.8) 98.12%);
+    border-color: rgba(159, 125, 239, 1);
+    box-shadow: 0px 4px 12px rgba(159, 125, 239, 0.5);
+}
+
+/* Grid lines */
+.calendar-timeline-container .rct-vertical-lines .rct-vl {
+    border-right: 1px solid rgba(72, 72, 101, 0.5);
+}
+
+.calendar-timeline-container .rct-horizontal-lines .rct-hl-even,
+.calendar-timeline-container .rct-horizontal-lines .rct-hl-odd {
+    border-bottom: 1px solid rgba(72, 72, 101, 0.3);
+}
+
+/* Today marker */
+.calendar-timeline-container .rct-today {
+    background: rgba(159, 125, 239, 0.2);
+}
+
+/* Scrollbars */
+.calendar-timeline-container .rct-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.calendar-timeline-container .rct-scroll::-webkit-scrollbar-track {
+    background: rgba(31, 31, 43, 1);
+}
+
+.calendar-timeline-container .rct-scroll::-webkit-scrollbar-thumb {
+    background: rgba(72, 72, 101, 1);
+    border-radius: 4px;
+}
+
+.calendar-timeline-container .rct-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(72, 72, 101, 0.8);
+}
+
+/* Item resize handles */
+.calendar-timeline-container .rct-item-left,
+.calendar-timeline-container .rct-item-right {
+    background: rgba(159, 125, 239, 0.9);
+    border-radius: 3px;
+}
+
+.calendar-timeline-container .rct-item-left:hover,
+.calendar-timeline-container .rct-item-right:hover {
+    background: rgba(159, 125, 239, 1);
+}
