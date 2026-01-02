@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import ChangeParameter from "./forms/changeParameter"
+import { useState } from "react"
+import changeParameterForm from "./forms/changeParameterForm"
+import AddLoanForm from "./forms/addLoanForm"
 import {
   OneOffExpenseIcon,
   PartialRentalIcon,
@@ -55,8 +56,8 @@ const EventButton = ({ icon: Icon, label, onClick }: EventButtonProps) => {
     { icon: OneOffExpenseIcon, label: "One-Off Expense" },
     { icon: PartialRentalIcon, label: "Partial Rental" },
     { icon: MoveHouseIcon, label: "Move House" },
-    { icon: AddLoanIcon, label: "Add Loan", component: ChangeParameter },
-    { icon: RefinanceIcon, label: "Refinance" },
+    { icon: AddLoanIcon, label: "Add Loan", component: AddLoanForm },
+    { icon: RefinanceIcon, label: "Refinance", component: changeParameterForm },
     { icon: AdjustLoanTermsIcon, label: "Adjust Loan Terms" },
     { icon: ConstructionLoanIcon, label: "Construction Loan" },
     { icon: CashImprovementsIcon, label: "Cash Improvements" },
@@ -140,7 +141,7 @@ const RightSidebar = ({ onClose }: RightSidebarProps) => {
                           />
                       ))}
                   </div>
-                  </div>
+                </div>
               </div>)}
     </div>
   )
