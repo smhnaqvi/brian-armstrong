@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import PriceItemBox from "../../components/priceItem"
 import CalenderTimeline from "../../components/calenderTimeline"
 
@@ -14,7 +14,7 @@ export default function Main() {
           <PriceItemBox label="equity available" price={200000} />
           <PriceItemBox label="debt outstanding" price={800000} />
         </div>
-        <div>
+        <div className={`grid gap-4`}>
           <CalenderTimeline />
         </div>
       </div>
