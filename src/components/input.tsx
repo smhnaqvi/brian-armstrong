@@ -42,11 +42,10 @@ const TextField = ({ name, label, placeholder, type = 'text' }: TextFieldProps) 
                                 placeholder={isLabelUp ? placeholder : ''}
                                 onFocus={() => setIsFocused(true)}
                                 onBlur={() => setIsFocused(false)}
-                                className={`w-full px-3 pt-[22px] pb-2 text-white border border-primary rounded-xl outline-none transition-colors ${
-                                    error
-                                        ? 'border-red-500 focus:border-red-600'
-                                        : 'border-gray-300 focus:border-blue-500'
-                                } focus:ring-2 focus:ring-blue-200`}
+                                style={{
+                                    border: "1px solid rgba(72, 72, 101, 1)"
+                                }}
+                                className={`w-full px-3 pt-[22px] pb-2 text-white rounded-xl outline-none transition-colors`}
                             />
                         </div>
                         {error && error.message && (
