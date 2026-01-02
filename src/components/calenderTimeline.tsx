@@ -140,6 +140,7 @@ const tasks = [
 
 const CalenderTimeline = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
   const tasksContainerRef = useRef<HTMLDivElement>(null)
@@ -217,13 +218,21 @@ const CalenderTimeline = () => {
       >
         {tasks.map((task, i)=> {
           return (
-            <div className='flex flex-col gap-2 z-10'>
-              <Task key={i} task={task} />
-              <div className='flex flex-col gap-2'>
-                {task.subTasks.map((subTask) => {
-                  return <SubTaskRow subTask={subTask} />
-                })}
-              </div>
+            <div key={task.id ?? i} className='flex flex-col gap-2 z-10'>
+              <Task
+                task={task}
+                isExpanded={expandedTaskId === task.id}
+                onToggle={(taskId) =>
+                  setExpandedTaskId((prev) => (prev === taskId ? null : taskId))
+                }
+              />
+              {expandedTaskId === task.id && (
+                <div className='flex flex-col gap-2'>
+                  {task.subTasks.map((subTask, subTaskIndex) => {
+                    return <SubTaskRow key={subTaskIndex} subTask={subTask} />
+                  })}
+                </div>
+              )}
             </div>
           )
         })}
@@ -262,10 +271,22 @@ const TimelineActionButton = forwardRef<HTMLDivElement, TimelineActionButtonProp
 
 TimelineActionButton.displayName = 'TimelineActionButton'
 
-const Task = ({ task }: { task: typeof tasks[number] }) => {
+const Task = ({
+  task,
+  isExpanded,
+  onToggle,
+}: {
+  task: typeof tasks[number]
+  isExpanded: boolean
+  onToggle: (taskId: number) => void
+}) => {
   return <div>
     <p className='text-[#B1B1C8] text-[10px] font-semibold ml-2 mb-1'>{task.title}</p>
-    <div className='flex bg-[#252534] p-[13px] border border-[#9F7DEF] rounded-xl cursor-pointer'>
+    <div
+      className='flex bg-[#252534] p-[13px] border border-[#9F7DEF] rounded-xl cursor-pointer'
+      onClick={() => onToggle(task.id)}
+      aria-expanded={isExpanded}
+    >
       <div className='flex gap-1 text-white items-center'>
         <task.icon />
           <span>{task.label}</span>
