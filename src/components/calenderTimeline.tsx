@@ -89,6 +89,7 @@ const timeline = generateTimeline(TIMELINE_START.year(), TIMELINE_END.year())
 type TimelineSubTask = {
   icon: React.ComponentType
   // current dataset uses `date`; range datasets may use `startDate/endDate`
+  date?: string | dayjs.Dayjs
   startDate?: string | dayjs.Dayjs
   endDate?: string | dayjs.Dayjs
   color: string
@@ -117,7 +118,7 @@ const tasks: TimelineTask[] = [
     subTasks: [
       {
         icon: SalaryIcon,
-        startDate: '2024-06-01',
+        startDate: '2024-12-01',
         endDate: '2029-08-31',
         label: 'Gross Annual Salary • $90,000 p.a.',
         color: '#9F7DEF',
@@ -126,7 +127,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: MoneyTransferIcon,
-        startDate: '2024-06-01',
+        startDate: '2025-02-01',
         endDate: '2029-07-11',
         label: 'Living Expenses • $8,000 p.m.',
         color: '#AF9BFF',
@@ -135,7 +136,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: ReceiptDollarIcon,
-        startDate: '2024-06-01',
+        startDate: '2025-06-01',
         endDate: '2028-03-15',
         label: 'HECS/HELP Loan • $20,000',
         color: '#2D60ED',
@@ -144,7 +145,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: GrowingMoneyIcon,
-        startDate: '2024-06-01',
+        startDate: '2026-01-01',
         endDate: '2030-06-15',
         label: 'Dependants • 0',
         color: '#35C9D2',
@@ -153,7 +154,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: MembersIcon,
-        startDate: '2024-06-01',
+        startDate: '2025-06-01',
         endDate: '2030-08-15',
         label: 'Side Hustle Income • p.m.',
         color: '#70B595',
@@ -172,7 +173,7 @@ const tasks: TimelineTask[] = [
     subTasks: [
       {
         icon: SalaryIcon,
-        startDate: '2025-01-01',
+        startDate: '2025-06-01',
         endDate: '2027-08-31',
         label: 'Gross Annual Salary • $90,000 p.a.',
         color: '#9F7DEF',
@@ -181,7 +182,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: MoneyTransferIcon,
-        startDate: '2025-01-01',
+        startDate: '2025-04-01',
         endDate: '2035-07-11',
         label: 'Living Expenses • $8,000 p.m.',
         color: '#AF9BFF',
@@ -190,7 +191,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: ReceiptDollarIcon,
-        startDate: '2025-01-01',
+        startDate: '2025-06-01',
         endDate: '2028-03-15',
         label: 'HECS/HELP Loan • $20,000',
         color: '#2D60ED',
@@ -199,7 +200,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: GrowingMoneyIcon,
-        startDate: '2025-01-01',
+        startDate: '2025-09-01',
         endDate: '2030-06-15',
         label: 'Dependants • 0',
         color: '#35C9D2',
@@ -208,7 +209,7 @@ const tasks: TimelineTask[] = [
       },
       {
         icon: MembersIcon,
-        startDate: '2025-01-01',
+        startDate: '2025-12-01',
         endDate: '2030-08-15',
         label: 'Side Hustle Income • p.m.',
         color: '#70B595',
@@ -372,27 +373,59 @@ const Task = ({
   isExpanded: boolean
   onToggle: () => void
 }) => (
-    <div className="relative h-[74px]">
+  <div className="relative h-[74px]">
+    {/* Sub-task icons positioned on the timeline line (by startDate) */}
+    <div className="absolute inset-0 pointer-events-none">
+      {(() => {
+        const byDayOffset = new Map<number, TimelineSubTask[]>()
+
+        task.subTasks.forEach((st) => {
+          const d = clampToTimeline(dayjs(st.startDate ?? st.date ?? task.startDate))
+          const dayOffset = d.diff(TIMELINE_START, 'day')
+          const group = byDayOffset.get(dayOffset)
+          if (group) group.push(st)
+          else byDayOffset.set(dayOffset, [st])
+        })
+
+        const BASE_TOP_PX = 48.5 // aligns icons roughly with the task bar line
+        const STACK_OFFSET_PX = 4 // overlap amount when multiple icons share a day
+
+        return Array.from(byDayOffset.entries()).flatMap(([dayOffset, group]) => {
+          const left = dayOffset * PX_PER_DAY
+          return group.map((st, stackIndex) => (
+            <div
+              key={`${dayOffset}-${stackIndex}`}
+              className="absolute"
+              style={{
+                left,
+                top: BASE_TOP_PX,
+                zIndex: 10 + stackIndex,
+                transform: `translate(-50%, -50%) translateY(${stackIndex * STACK_OFFSET_PX}px)`,
+              }}
+            >
+              <SubTaskCircle subTask={st} />
+            </div>
+          ))
+        })
+      })()}
+    </div>
+
+    {/* Task bar (range-based) */}
     <div
-        className='absolute flex flex-col gap-1 h-[52px]'
-        style={getRangeStyle(task.startDate, task.endDate)}
-        onClick={onToggle}
-        aria-expanded={isExpanded}
+      className="absolute flex flex-col gap-1 h-[52px]"
+      style={getRangeStyle(task.startDate, task.endDate)}
+      onClick={onToggle}
+      aria-expanded={isExpanded}
     >
       <p className="text-[12px] ml-2 text-[#9494B3]">{task.title}</p>
       <div className="flex bg-[#252534] p-[13px] border border-[#9F7DEF] rounded-xl cursor-pointer">
         <div className="flex gap-1 items-center text-white">
           <task.icon />
           <span>{task.label}</span>
-          <div className="flex gap-1">
-            {task.subTasks.map((st, i) => (
-              <SubTaskCircle key={i} subTask={st} />
-            ))}
-          </div>
         </div>
       </div>
-      </div>
     </div>
+  </div>
 )
 
 const SubTaskRow = ({ subTask }: { subTask: TimelineSubTask }) => {
