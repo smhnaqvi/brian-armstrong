@@ -341,6 +341,16 @@ export const DuplexIcon = () => {
     )
 }
 
+
+export const UploadIcon = () => {
+    return (
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 4L8 2M8 2L10 4M8 2V10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 6C3.34315 6 2 7.34315 2 9V10C2 12.2091 3.79086 14 6 14L10 14C12.2091 14 14 12.2091 14 10V9C14 7.34315 12.6569 6 11 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    )
+}
+
 export default {
     GridIcon,
     NotificationIcon,
