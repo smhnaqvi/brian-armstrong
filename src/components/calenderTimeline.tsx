@@ -187,7 +187,7 @@ const tasks: TimelineTask[] = [
       {
         icon: MoneyTransferIcon,
         startDate: '2025-04-01',
-        endDate: '2035-07-11',
+        endDate: '2030-07-11',
         label: 'Living Expenses • $8,000 p.m.',
         color: '#AF9BFF',
         gradient:
@@ -342,7 +342,7 @@ const CalenderTimeline = () => {
             className="relative flex flex-col z-10 gap-3.5 top-[45px] ml-[25px]"
           >
             {tasks.map(task => (
-              <div key={task.id} className="flex flex-col gap-2">
+              <div key={task.id} className="flex flex-col" style={{gap: '13px'}}>
                 <Task
                   task={task}
                   isExpanded={expandedTaskId === task.id}
@@ -352,7 +352,7 @@ const CalenderTimeline = () => {
                 />
 
                 {expandedTaskId === task.id && (
-                  <div className="flex flex-col gap-3.5">
+                  <div className="flex flex-col" style={{gap: '12px'}}>
                     {task.subTasks.map((st, i) => (
                       <SubTaskRow key={i} subTask={st} />
                     ))}
@@ -492,6 +492,7 @@ const SubTaskRow = ({ subTask }: { subTask: TimelineSubTask }) => {
           ...getRangeStyle(start, end),
           background: subTask.gradient,
           border: `1px solid ${subTask.color}`,
+          padding: '7.5px 12px'
         }}
       >
         <subTask.icon />
