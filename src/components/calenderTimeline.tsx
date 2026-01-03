@@ -256,7 +256,24 @@ const CalenderTimeline = () => {
 
   return (
     <>
-      <div className="relative w-full overflow-x-auto">
+      <div className="relative w-full max-h-screen overflow-x-auto overflow-y-auto">
+        {/* ===== STICKY TIMELINE HEADER (labels) ===== */}
+        <div className="sticky top-0 z-20 pl-[20px] bg-[#14141C]">
+          <div className="relative" style={{ width: TIMELINE_WIDTH + 20, height: 48 }}>
+            {timeline.map((item) => (
+              <div
+                key={item.id}
+                className="absolute top-2 flex flex-col items-center"
+                style={{
+                  left: item.startDate.diff(TIMELINE_START, 'day') * PX_PER_DAY,
+                }}
+              >
+                <span className="text-[#9494B3] text-[12px]">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div
           ref={containerRef}
           className="relative pl-[20px]"
@@ -264,17 +281,16 @@ const CalenderTimeline = () => {
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
-          {/* ===== TIMELINE HEADER (DAY-BASED) ===== */}
-          <div className="absolute inset-0 z-1">
+          {/* ===== TIMELINE GRID (vertical lines) ===== */}
+          <div className="absolute inset-0 z-1 pointer-events-none">
             {timeline.map((item) => (
               <div
                 key={item.id}
-                className="absolute flex flex-col items-center gap-1.5 h-full"
+                className="absolute flex flex-col items-center h-full"
                 style={{
                   left: item.startDate.diff(TIMELINE_START, 'day') * PX_PER_DAY,
                 }}
               >
-                <span className="text-[#9494B3] text-[12px]">{item.label}</span>
                 <div className="w-px h-full bg-[#333348]" />
               </div>
             ))}
@@ -283,7 +299,7 @@ const CalenderTimeline = () => {
           {/* ===== TASKS (layout stays column-based; range bars inside rows) ===== */}
           <div
             ref={tasksContainerRef}
-            className="relative flex flex-col z-10 gap-3.5 top-[73px]"
+            className="relative flex flex-col z-10 gap-3.5 pt-[73px]"
           >
             {tasks.map(task => (
               <div key={task.id} className="flex flex-col gap-2">
