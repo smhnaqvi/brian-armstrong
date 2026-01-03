@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import PriceItemBox from "../../components/priceItem"
 import CalenderTimeline from "../../components/calenderTimeline"
 
