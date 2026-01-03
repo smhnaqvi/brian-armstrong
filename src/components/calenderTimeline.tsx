@@ -296,7 +296,7 @@ const CalenderTimeline = () => {
           {/* ===== TASKS (layout stays column-based; range bars inside rows) ===== */}
           <div
             ref={tasksContainerRef}
-            className="relative flex flex-col z-10 gap-3.5 top-[50px] ml-[25px]"
+            className="relative flex flex-col z-10 gap-3.5 top-[45px] ml-[25px]"
           >
             {tasks.map(task => (
               <div key={task.id} className="flex flex-col gap-2">
@@ -379,7 +379,7 @@ const Task = ({
         onClick={onToggle}
         aria-expanded={isExpanded}
     >
-      <p className="text-[12px] text-[#9494B3]">{task.title}</p>
+      <p className="text-[12px] ml-2 text-[#9494B3]">{task.title}</p>
       <div className="flex bg-[#252534] p-[13px] border border-[#9F7DEF] rounded-xl cursor-pointer">
         <div className="flex gap-1 items-center text-white">
           <task.icon />
