@@ -248,6 +248,7 @@ const CalenderTimeline = () => {
   const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [actionMonthLabel, setActionMonthLabel] = useState('JUL')
+  const [isActionButtonVisible, setIsActionButtonVisible] = useState(false)
 
   const containerRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
@@ -263,6 +264,7 @@ const CalenderTimeline = () => {
     }
 
     animationFrameRef.current = requestAnimationFrame(() => {
+      setIsActionButtonVisible((v) => (v ? v : true))
       const rect = containerRef.current!.getBoundingClientRect()
       const x = e.clientX - rect.left
       buttonRef.current!.style.left = `${x}px`
@@ -289,6 +291,7 @@ const CalenderTimeline = () => {
     if (!buttonRef.current) return
     buttonRef.current.style.left = '-20px'
     buttonRef.current.style.transform = 'none'
+    setIsActionButtonVisible(false)
   }, [])
 
   return (
@@ -363,6 +366,7 @@ const CalenderTimeline = () => {
             ref={buttonRef}
             onClick={() => setIsSidebarOpen(true)}
             label={actionMonthLabel}
+            isVisible={isActionButtonVisible}
           />
         </div>
       </div>
@@ -384,11 +388,18 @@ const CalenderTimeline = () => {
 
 const TimelineActionButton = forwardRef<
   HTMLDivElement,
-  { onClick?: React.MouseEventHandler<HTMLButtonElement>; label: string }
->(({ onClick, label }, ref) => (
+  {
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
+    label: string
+    isVisible: boolean
+  }
+>(({ onClick, label, isVisible }, ref) => (
   <div
     ref={ref}
-    className="absolute z-1 top-[6px] flex flex-col items-center"
+    className={[
+      'absolute z-1 top-[6px] flex flex-col items-center transition-opacity duration-150',
+      isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none',
+    ].join(' ')}
     style={{ left: '-7px', height: TIMELINE_HEIGHT }}
   >
     <Button
