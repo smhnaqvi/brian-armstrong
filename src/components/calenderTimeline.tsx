@@ -247,11 +247,13 @@ const tasks: TimelineTask[] = [
 const CalenderTimeline = () => {
   const [expandedTaskId, setExpandedTaskId] = useState<number | null>(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [actionMonthLabel, setActionMonthLabel] = useState('JUL')
 
   const containerRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
   const tasksContainerRef = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number | null>(null)
+  const lastActionMonthLabelRef = useRef<string>('JUL')
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current || !buttonRef.current) return
@@ -265,6 +267,21 @@ const CalenderTimeline = () => {
       const x = e.clientX - rect.left
       buttonRef.current!.style.left = `${x}px`
       buttonRef.current!.style.transform = 'translateX(-50%)'
+
+      // Month label should reflect the date at the current X position.
+      // Timeline content (grid/tasks) is shifted by `ml-[25px]`, so subtract it.
+      const CONTENT_OFFSET_PX = 25
+      const xInTimeline = x - CONTENT_OFFSET_PX
+      const dayOffset = Math.max(
+        0,
+        Math.min(TOTAL_DAYS - 1, Math.round(xInTimeline / PX_PER_DAY)),
+      )
+      const d = TIMELINE_START.add(dayOffset, 'day')
+      const nextLabel = d.format('MMM').toUpperCase()
+      if (nextLabel !== lastActionMonthLabelRef.current) {
+        lastActionMonthLabelRef.current = nextLabel
+        setActionMonthLabel(nextLabel)
+      }
     })
   }, [])
 
@@ -345,6 +362,7 @@ const CalenderTimeline = () => {
           <TimelineActionButton
             ref={buttonRef}
             onClick={() => setIsSidebarOpen(true)}
+            label={actionMonthLabel}
           />
         </div>
       </div>
@@ -366,8 +384,8 @@ const CalenderTimeline = () => {
 
 const TimelineActionButton = forwardRef<
   HTMLDivElement,
-  { onClick?: React.MouseEventHandler<HTMLButtonElement> }
->(({ onClick }, ref) => (
+  { onClick?: React.MouseEventHandler<HTMLButtonElement>; label: string }
+>(({ onClick, label }, ref) => (
   <div
     ref={ref}
     className="absolute z-1 top-[6px] flex flex-col items-center"
@@ -378,7 +396,7 @@ const TimelineActionButton = forwardRef<
       className="bg-white flex items-center gap-1 px-3 py-1.5 rounded-full text-[12px]"
     >
       <PlusIcon />
-      JUL
+      {label}
     </Button>
     <div className="w-[3px] h-full bg-white" />
   </div>
