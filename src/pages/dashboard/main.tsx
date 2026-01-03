@@ -14,7 +14,7 @@ export default function Main() {
           <PriceItemBox label="equity available" price={200000} />
           <PriceItemBox label="debt outstanding" price={800000} />
         </div>
-        <div className={`grid gap-4`}>
+        <div className={`grid gap-4 h-[80vh]`}>
           <CalenderTimeline />
         </div>
       </div>

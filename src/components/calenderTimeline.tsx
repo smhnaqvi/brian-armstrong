@@ -1,6 +1,8 @@
 import React, { useRef, useCallback, forwardRef, useState } from 'react'
 import dayjs from 'dayjs'
 import {
+  ApartmentsIcon,
+  DuplexIcon,
   GrowingMoneyIcon,
   HouseIcon,
   MembersIcon,
@@ -22,6 +24,8 @@ const PX_PER_DAY = .73 // فقط روی header timeline اثر دارد
 
 const TOTAL_DAYS = TIMELINE_END.diff(TIMELINE_START, 'day') + 1
 const TIMELINE_WIDTH = TOTAL_DAYS * PX_PER_DAY
+
+const TIMELINE_HEIGHT = "110%"
 
 /* ===================== RANGE HELPERS ===================== */
 
@@ -128,7 +132,7 @@ const tasks: TimelineTask[] = [
       {
         icon: MoneyTransferIcon,
         startDate: '2025-02-01',
-        endDate: '2029-07-11',
+        endDate: '2030-08-15',
         label: 'Living Expenses • $8,000 p.m.',
         color: '#AF9BFF',
         gradient:
@@ -218,6 +222,24 @@ const tasks: TimelineTask[] = [
       },
     ],
   },
+  {
+    id: 3,
+    startDate: dayjs('2027-01-01'),
+    endDate: dayjs('2030-01-01'),
+    icon: ApartmentsIcon,
+    title: "Redfern Property• Apartment",
+    label: "",
+    subTasks:[]
+  },
+  {
+    id: 3,
+    startDate: dayjs('2026-01-01'),
+    endDate: dayjs('2029-01-01'),
+    icon: DuplexIcon,
+    title: "Brighton Property • Apartment",
+    label: "",
+    subTasks:[]
+  }
 ]
 
 /* ===================== COMPONENT ===================== */
@@ -257,7 +279,7 @@ const CalenderTimeline = () => {
       <div className="relative w-full max-h-screen overflow-x-auto overflow-y-auto">
         {/* ===== STICKY TIMELINE HEADER (labels) ===== */}
         <div className="sticky top-0 z-20 ml-[15px] bg-[#14141C]">
-          <div className="relative h-[17px]" style={{ width: TIMELINE_WIDTH + 20 }}>
+          <div className="relative h-[17px]" style={{ width: TIMELINE_WIDTH + 20, background: "#13131B" }}>
             {timeline.map((item) => (
               <div
                 key={item.id}
@@ -280,7 +302,7 @@ const CalenderTimeline = () => {
           onMouseLeave={handleMouseLeave}
         >
           {/* ===== TIMELINE GRID (vertical lines) ===== */}
-          <div className="absolute inset-0 z-1 pointer-events-none ml-[25px] h-[120%]">
+          <div className="absolute inset-0 z-1 pointer-events-none ml-[25px]" style={{height: TIMELINE_HEIGHT}}>
             {timeline.map((item) => (
               <div
                 key={item.id}
@@ -348,8 +370,8 @@ const TimelineActionButton = forwardRef<
 >(({ onClick }, ref) => (
   <div
     ref={ref}
-    className="absolute z-1 top-[6px] flex flex-col items-center h-[120%]"
-    style={{ left: '-7px' }}
+    className="absolute z-1 top-[6px] flex flex-col items-center"
+    style={{ left: '-7px', height: TIMELINE_HEIGHT }}
   >
     <Button
       onClick={onClick}
