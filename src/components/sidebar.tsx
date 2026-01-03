@@ -19,7 +19,7 @@ const buttomNavigationItems = [
 const Sidebar = () => {
   const avatar = "/images/avatar.svg"
   return (
-    <div className="h-screen flex flex-col justify-between bg-[#1B1B26] border border-white/10 w-[70px] p-[11px]">
+    <div className="fixed left-0 top-0 h-screen flex flex-col justify-between bg-[#1B1B26] border border-white/10 w-[70px] p-[11px] overflow-hidden z-50">
       <div className="flex flex-col gap-8">
         <Logo />
         <NavigationList items={navigationItems} />
