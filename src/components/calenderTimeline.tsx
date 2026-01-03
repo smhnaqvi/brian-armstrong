@@ -280,7 +280,7 @@ const CalenderTimeline = () => {
           onMouseLeave={handleMouseLeave}
         >
           {/* ===== TIMELINE GRID (vertical lines) ===== */}
-          <div className="absolute inset-0 z-1 pointer-events-none ml-[25px]">
+          <div className="absolute inset-0 z-1 pointer-events-none ml-[25px] h-[120%]">
             {timeline.map((item) => (
               <div
                 key={item.id}
@@ -348,7 +348,7 @@ const TimelineActionButton = forwardRef<
 >(({ onClick }, ref) => (
   <div
     ref={ref}
-    className="absolute z-1 h-full top-[6px] flex flex-col items-center"
+    className="absolute z-1 top-[6px] flex flex-col items-center h-[120%]"
     style={{ left: '-7px' }}
   >
     <Button
