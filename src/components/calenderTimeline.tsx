@@ -283,7 +283,7 @@ const CalenderTimeline = () => {
           {/* ===== TASKS (layout stays column-based; range bars inside rows) ===== */}
           <div
             ref={tasksContainerRef}
-            className="relative flex flex-col z-10 gap-3.5 pt-[73px]"
+            className="relative flex flex-col z-10 gap-3.5 top-[73px]"
           >
             {tasks.map(task => (
               <div key={task.id} className="flex flex-col gap-2">
