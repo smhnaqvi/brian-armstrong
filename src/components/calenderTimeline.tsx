@@ -2,13 +2,10 @@ import React, { useRef, useCallback, forwardRef, useState } from 'react'
 import dayjs from 'dayjs'
 import {
   GrowingMoneyIcon,
-  HouseDollerIcon,
   HouseIcon,
   MembersIcon,
   MoneyTransferIcon,
-  PercentageIcon,
   PlusIcon,
-  RatingsIcon,
   ReceiptDollarIcon,
   SalaryIcon,
   UserIcon,
@@ -258,12 +255,12 @@ const CalenderTimeline = () => {
     <>
       <div className="relative w-full max-h-screen overflow-x-auto overflow-y-auto">
         {/* ===== STICKY TIMELINE HEADER (labels) ===== */}
-        <div className="sticky top-0 z-20 pl-[20px] bg-[#14141C]">
-          <div className="relative" style={{ width: TIMELINE_WIDTH + 20, height: 48 }}>
+        <div className="sticky top-0 z-20 ml-[15px] bg-[#14141C]">
+          <div className="relative h-[17px]" style={{ width: TIMELINE_WIDTH + 20 }}>
             {timeline.map((item) => (
               <div
                 key={item.id}
-                className="absolute top-2 flex flex-col items-center"
+                className="absolute flex flex-col items-center"
                 style={{
                   left: item.startDate.diff(TIMELINE_START, 'day') * PX_PER_DAY,
                 }}
@@ -276,13 +273,13 @@ const CalenderTimeline = () => {
 
         <div
           ref={containerRef}
-          className="relative pl-[20px]"
+          className="relative top-[7px]"
           style={{ width: TIMELINE_WIDTH + 20 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
           {/* ===== TIMELINE GRID (vertical lines) ===== */}
-          <div className="absolute inset-0 z-1 pointer-events-none">
+          <div className="absolute inset-0 z-1 pointer-events-none ml-[25px]">
             {timeline.map((item) => (
               <div
                 key={item.id}
@@ -299,7 +296,7 @@ const CalenderTimeline = () => {
           {/* ===== TASKS (layout stays column-based; range bars inside rows) ===== */}
           <div
             ref={tasksContainerRef}
-            className="relative flex flex-col z-10 gap-3.5 pt-[73px]"
+            className="relative flex flex-col z-10 gap-3.5 top-[50px] ml-[25px]"
           >
             {tasks.map(task => (
               <div key={task.id} className="flex flex-col gap-2">
@@ -330,7 +327,7 @@ const CalenderTimeline = () => {
       </div>
 
       <div
-        className={`absolute z-10 top-0 right-0 h-full transition-all duration-300 ${
+        className={`absolute z-50 top-0 right-0 h-full transition-all duration-300 ${
           isSidebarOpen
             ? 'w-[407px] opacity-100'
             : 'w-0 opacity-0 overflow-hidden'
@@ -350,8 +347,8 @@ const TimelineActionButton = forwardRef<
 >(({ onClick }, ref) => (
   <div
     ref={ref}
-    className="absolute z-1 h-full top-[30px] flex flex-col items-center"
-    style={{ left: '-20px' }}
+    className="absolute z-1 h-full top-[6px] flex flex-col items-center"
+    style={{ left: '-7px' }}
   >
     <Button
       onClick={onClick}
