@@ -25,7 +25,7 @@ const PX_PER_DAY = .73 // فقط روی header timeline اثر دارد
 const TOTAL_DAYS = TIMELINE_END.diff(TIMELINE_START, 'day') + 1
 const TIMELINE_WIDTH = TOTAL_DAYS * PX_PER_DAY
 
-const TIMELINE_HEIGHT = "110%"
+const TIMELINE_HEIGHT = "150%"
 
 /* ===================== RANGE HELPERS ===================== */
 
@@ -404,7 +404,7 @@ const TimelineActionButton = forwardRef<
   >
     <Button
       onClick={onClick}
-      className="bg-white flex items-center gap-1 px-3 py-1.5 rounded-full text-[12px]"
+      className="bg-white flex items-center gap-1 px-3 py-1.5 rounded-full text-[12px] cursor-pointer"
     >
       <PlusIcon />
       {label}
